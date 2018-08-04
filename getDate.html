@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>下载数据</title>
+		<script>
+			window.onload = function(){
+				var btn1 = document.getElementById("btn1");
+				var ul1 = document.getElementById("ul1");
+
+				btn1.onclick = function(){
+					//通过Ajax下载数据
+					//声明一个Ajax对象
+					
+					/*
+					 打开浏览器
+					 做浏览器兼容,IE6不兼容XMLHttpRequest
+					 */
+					if(XMLHttpRequest){
+						var xhr = new XMLHttpRequest();
+					}else{
+						var xhr = new ActiveXObject('Microsoft.XMLHTTP');
+					}
+					//在地址栏输入地址
+					xhr.open('get', '01.txt', true);
+					//发送,提交 回车
+					xhr.send();
+					//返回结果
+					xhr.onreadystatechange = function(){
+						if(xhr.readyState == 4){
+							console.log(xhr.responseText);
+							var newLi = document.createElement('li');
+							ul1.appendChild(newLi);
+							document.write(xhr.responseText);
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<ul id="ul1">
+			<li>习近平眼中的“四有”军人</li><button id="btn1">下载</button>
+		</ul>
+		
+	</body>
+</html>
