@@ -16,10 +16,17 @@
 					 打开浏览器
 					 做浏览器兼容,IE6不兼容XMLHttpRequest
 					 */
-					if(XMLHttpRequest){
+					/*if(XMLHttpRequest){
 						var xhr = new XMLHttpRequest();
 					}else{
 						var xhr = new ActiveXObject('Microsoft.XMLHTTP');
+					}*/
+					try{
+						var xhr = new XMLHttpRequest();
+					}
+					catch(error){
+						var xhr = new ActiveXObject('Microsoft.XMLHTTP');
+						console.log(error);
 					}
 					//在地址栏输入地址
 					xhr.open('get', '01.txt', true);
@@ -28,9 +35,7 @@
 					//返回结果
 					xhr.onreadystatechange = function(){
 						if(xhr.readyState == 4){
-							console.log(xhr.responseText);
-							var newLi = document.createElement('li');
-							ul1.appendChild(newLi);
+							
 							document.write(xhr.responseText);
 						}
 					}
